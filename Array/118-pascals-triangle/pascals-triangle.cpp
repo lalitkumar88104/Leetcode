@@ -1,17 +1,22 @@
 class Solution {
 public:
+    // helper fun;
+    vector<int> genraterow(int row) {
+        vector<int> temp;
+        long long ans = 1;
+        temp.emplace_back(ans);
+        for (int col = 1; col < row; ++col) {
+            ans = ans * (row - col);
+            ans = ans / col;
+            temp.emplace_back(ans);
+        }
+        return temp;
+    }
+
     vector<vector<int>> generate(int numRows) {
         vector<vector<int>> ans;
-        for (int i = 1; i <= numRows; i++) {
-            vector<int> temp;
-            long long res = 1;
-            temp.push_back(res);
-            for (int j = 1; j < i ; j++) {
-                res = res * (i - j);
-                res = res / j;
-                temp.push_back(res);
-            }
-            ans.emplace_back(temp);
+        for (int i = 1; i <= numRows; ++i) {
+            ans.emplace_back(genraterow(i));
         }
         return ans;
     }
